@@ -2,3 +2,18 @@
   display:flex;
   flex-direction: column;
 }
+
+.list-beers{
+  display:flex;
+  height:320px;
+}
+
+.list-beers-1 img {
+  height:100%;
+}
+
+.list-beers-2 ul {
+  list-style-type: none;
+}
+
+

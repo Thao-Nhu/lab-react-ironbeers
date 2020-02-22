@@ -3,15 +3,16 @@ import Header from './Header.js';
 import { Link } from 'react-router-dom'; 
 import axios from "axios";
 
-class Randombeer extends React.Component {
+class BeerDetail extends React.Component {
   state={}
   componentDidMount(){
-    this.getRandomBeer()
+    this.getSingleBeer()
 }
-  getRandomBeer=()=>{
-      axios.get(`https://ih-beers-api2.herokuapp.com/beers/random`)
+  getSingleBeer=()=>{
+      
+      axios.get(`https://ih-beers-api2.herokuapp.com/beers/${this.props.match.params.id}`)
       .then(response => {
-        console.log("beer detail", response.data)
+     
         this.setState(response.data)
     })
       .catch(err=>console.log(err))
@@ -35,4 +36,4 @@ class Randombeer extends React.Component {
   }
 }
 
-export default Randombeer;
+export default BeerDetail;

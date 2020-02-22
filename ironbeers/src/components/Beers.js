@@ -1,5 +1,6 @@
 import React from 'react';
 import Header from './Header.js';
+//import Newbeer from './Newbeer.js'
 import { Link } from 'react-router-dom'; 
 import axios from "axios";
 
@@ -8,28 +9,39 @@ class Beers extends React.Component {
     listOfBeers:[]
   }
   getAllBeers=()=>{
-    console.log("hello")
-    axios.get("https://ih-beer-api.herokuapp.com/beers")
+  
+    axios.get("https://ih-beers-api2.herokuapp.com/beers")
     .then(
       response => {
-        console.log("response from API", response.data)
         this.setState({listOfBeers:response.data})
       }
       )
     .catch(err=>console.log("err"))
+  }
+  componentDidMount(){
+    this.getAllBeers();
   }
   render(){
     return (
       <div >
         <Link to="/"><Header/></Link>
         <div>
-          {this.state.listOfBeers.map((beer,index)=>{
+          {this.state.listOfBeers.map((beer)=>{
             return(
-              <div key={index}>{beer}</div>
+              <div key={beer._id} className="list-beers">
+                <div className="list-beers-1"><img src={beer.image_url} alt={beer.name}/></div>
+                <div className="list-beers-2">
+                  <ul>
+                    <Link to={`/beers/${beer._id}`}><li><h1>{beer.name}</h1></li></Link>
+                    <li>{beer.tagline}</li>
+                    <li>created by: {beer.contributed_by}</li>
+                  </ul>
+                </div>
+              </div>
             )
           })}
         </div>    
-         
+      
       </div>
     )
   }
